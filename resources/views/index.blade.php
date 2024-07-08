@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -480,18 +480,31 @@
     </footer>
     {{-- Footer End --}}
 
+    {{-- Back to top Start --}}
+    <a href="#home" id="to-top" class="hidden fixed z-[9999] bottom-4 right-4 p-4 h-14 w-14 rounded-full bg-primary-500 justify-center items-center hover:animate-pulse">
+        <span class="block h-5 w-5 border-t-2 border-l-2 rotate-45 mt-2"></span>
+    </a>
+    {{-- Back to top End --}}
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             window.onscroll = function() {
                 const header = document.querySelector('header');
                 const fixedNav = header.offsetTop;
+                const toTop = document.querySelector('#to-top');
 
                 if (window.pageYOffset > fixedNav) {
                     header.classList.add('navbar-fixed');
+                    toTop.classList.remove('hidden');
+                    toTop.classList.add('flex');
                 } else {
                     header.classList.remove('navbar-fixed');
+                    toTop.classList.remove('flex');
+                    toTop.classList.add('hidden');
                 }
             }
+
+
 
             const hamburger = document.querySelector('#hamburger');
             const navMenu = document.querySelector('#nav-menu');
@@ -501,6 +514,14 @@
                     navMenu.classList.toggle('hidden');
                 });
             }
+
+            //klik out of hamburger
+            window.addEventListener('click', function(e){
+                if(e.target != hamburger && e.target != navMenu){
+                    hamburger.classList.remove('hamburger-active');
+                    navMenu.classList.add('hidden');
+                }
+            });
         });
     </script>
 </body>
